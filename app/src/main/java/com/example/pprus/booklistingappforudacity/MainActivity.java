@@ -1,11 +1,11 @@
 package com.example.pprus.booklistingappforudacity;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
-import static android.R.attr.id;
+import static android.R.attr.start;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -13,6 +13,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
+
+    public void openListOfBooks(View view) {
+        Intent intent = new Intent(this, BookListActivity.class);
+        startActivity(intent);
     }
 }
 
