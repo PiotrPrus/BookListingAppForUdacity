@@ -1,5 +1,6 @@
 package com.example.pprus.booklistingappforudacity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,14 +22,20 @@ public class BookListActivity extends AppCompatActivity {
     private static final String MAIN_URL = "https://www.googleapis.com/books/v1/";
 
     private RecyclerView recyclerView;
-    private BookAdapter adapter;
     private List<Book> data;
+    private String searchValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recycler_view);
+        initSearchValue();
         initViews();
+    }
+
+    private void initSearchValue() {
+        Intent intent = getIntent();
+        searchValue = intent.getStringExtra(String.valueOf(R.string.book_search_sentence));
     }
 
     private void initViews() {
@@ -43,7 +50,7 @@ public class BookListActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         RequestInterface request = retrofit.create(RequestInterface.class);
-        Call<JSONResponse> call = request.getJSON("java");
+        Call<JSONResponse> call = request.getJSON(searchValue);
         call.enqueue(new Callback<JSONResponse>() {
             @Override
             public void onResponse(Call<JSONResponse> call, Response<JSONResponse> response) {
