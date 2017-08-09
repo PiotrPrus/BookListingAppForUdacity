@@ -59,7 +59,7 @@ public class BookListActivity extends AppCompatActivity {
                 data = jsonResponse.getItems();
                 Log.d(TAG, "Number of books received: " + data.size());
 //                Log.d("Data from server: ", String.valueOf(data));
-                recyclerView.setAdapter(new BookAdapter(data));
+                recyclerView.setAdapter(new BookAdapter(getApplicationContext(), data));
             }
 
             @Override

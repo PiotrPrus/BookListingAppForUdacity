@@ -9,22 +9,33 @@ import com.google.gson.annotations.SerializedName;
 public class VolumeInfo {
     @SerializedName("title")
     private String title;
-    @SerializedName("publisher")
-    private String publisher;
+    @SerializedName("subtitle")
+    private String subtitle;
+    @SerializedName("authors")
+    private String[] authors;
+    @SerializedName("publishedDate")
+    private String publishedDate;
+    @SerializedName("imageLinks")
+    private ImageLinks imageLinks;
 
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public String getPublishedDate() {
+        return publishedDate;
     }
 
-    public String getPublisher() {
-        return publisher;
+    public ImageLinks getImageLinks() {
+        return imageLinks;
     }
 
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
+    public String getSubtitle() {
+        return subtitle;
+    }
+
+    public String[] getAuthors() {
+        return authors;
     }
 }
+

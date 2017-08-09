@@ -1,10 +1,15 @@
 package com.example.pprus.booklistingappforudacity;
 
+import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -14,8 +19,10 @@ import java.util.List;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
     private List<Book> bookList;
+    private Context context;
 
-    public BookAdapter(List<Book> bookList) {
+    public BookAdapter(Context context, List<Book> bookList) {
+        this.context = context;
         this.bookList = bookList;
     }
 
@@ -29,8 +36,24 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(BookAdapter.ViewHolder holder, int position) {
-        holder.bookTitle.setText(bookList.get(position).getVolumeInfo().getTitle());
-        holder.bookAuthors.setText(bookList.get(position).getVolumeInfo().getPublisher());
+        holder.bookTitleTextView.setText(bookList.get(position).getVolumeInfo().getTitle());
+        holder.bookSubtitleTextView.setText(bookList.get(position).getVolumeInfo().getSubtitle());
+        String publishedDate = context.getString(R.string.published_in) + bookList.get(position).getVolumeInfo().getPublishedDate();
+        holder.bookPublishedDateTextView.setText(publishedDate);
+        holder.bookAuthorsTextView.setText(concatenateAuthorsText(position));
+        Picasso.with(context).load(bookList.get(position).getVolumeInfo().getImageLinks().getThumbnail()).into(holder.bookCoverImageView);
+    }
+
+    @NonNull
+    private String concatenateAuthorsText(int position) {
+        StringBuilder sb = new StringBuilder();
+        String[] authors = bookList.get(position).getVolumeInfo().getAuthors();
+        for (String author : authors) {
+            sb.append(author);
+            sb.append("\n");
+        }
+        String authorsMultiline = sb.toString();
+        return context.getString(R.string.written_by) + authorsMultiline;
     }
 
     @Override
@@ -43,14 +66,20 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView bookTitle;
-        private TextView bookAuthors;
+        private TextView bookTitleTextView;
+        private TextView bookAuthorsTextView;
+        private TextView bookPublishedDateTextView;
+        private TextView bookSubtitleTextView;
+        private ImageView bookCoverImageView;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
-            bookTitle = (TextView) itemView.findViewById(R.id.book_title_text_view);
-            bookAuthors = (TextView) itemView.findViewById(R.id.book_author_text_view);
+            bookTitleTextView = (TextView) itemView.findViewById(R.id.book_title_text_view);
+            bookAuthorsTextView = (TextView) itemView.findViewById(R.id.book_author_text_view);
+            bookCoverImageView = (ImageView) itemView.findViewById(R.id.book_cover_image_view);
+            bookPublishedDateTextView = (TextView) itemView.findViewById(R.id.published_date_text_view);
+            bookSubtitleTextView = (TextView) itemView.findViewById(R.id.book_subtitle_text_view);
         }
     }
 }
