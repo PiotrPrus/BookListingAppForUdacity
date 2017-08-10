@@ -39,7 +39,7 @@ public class BookListActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-        recyclerView = (RecyclerView)findViewById(R.id.recycler_view_list);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         loadJSON();
     }

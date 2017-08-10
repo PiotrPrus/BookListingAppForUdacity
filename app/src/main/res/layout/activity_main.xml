@@ -53,8 +53,6 @@
         android:layout_height="91dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="9dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="9dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/google_books_description"

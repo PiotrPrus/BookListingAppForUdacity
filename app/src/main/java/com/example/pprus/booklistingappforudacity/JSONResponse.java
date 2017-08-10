@@ -8,7 +8,7 @@ import java.util.List;
  * Created by Piotr Prus on 01.08.2017.
  */
 
-public class JSONResponse{
+public class JSONResponse {
     @SerializedName("items")
     private List<Book> items;
 
